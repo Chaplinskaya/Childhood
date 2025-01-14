@@ -13,5 +13,20 @@ function childhood_scripts() {
 };
 
  add_theme_support( 'custom-logo' );
+ add_theme_support( 'post-thumbnails' );
+
+ add_filter( 'wp_kses_allowed_html', 'acf_add_allowed_iframe_tag', 10, 2 );
+function acf_add_allowed_iframe_tag( $tags, $context ) {
+    if ($context === 'acf' ) {
+        $tags['iframe'] = array(
+        'src' => true,
+        'height' => true,
+        'width' => true,
+        'frameborder' => true,
+        'allowfullscreen' => true,
+        );
+    }
+    return $tags;
+}
 
 ?>
